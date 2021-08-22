@@ -1,0 +1,70 @@
+﻿@model Domain.Dto.ListExchange<Domain.Dto.Exchange.ExchangeResponseDto>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-striped" id="tblExchange">
+                <thead>
+                    <tr>
+                        <th>Treinador 1</th>
+                        <th>Treinador 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ foreach (var item in Model.Data)
+                        {
+                            <tr>
+                                <td>@item.TraderOne.Name</td>
+                                <td>@item.TraderTwo.Name</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @{ foreach (var pokemon in item.TraderOne.Pokemons)
+                                        {
+
+                                            <img src="@pokemon.Url" />
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @{ foreach (var pokemon in item.TraderTwo.Pokemons)
+                                        {
+
+                                            <img src="@pokemon.Url" />
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+   
+    <script>
+        $(document).ready(function () {
+            var table = $('#tblExchange').DataTable(
+                {
+                    "bPaginate": true,
+                    "bLengthChange": false,
+                    "bFilter": false,
+                    "bInfo": false,
+                    "bAutoWidth": false,
+                    "order": false,
+
+                }
+            );
+        });
+    </script>
+}  
